@@ -512,10 +512,12 @@
     const timerText = document.getElementById('timerText');
     let timeLeft = 10;
 
-    // Show popup on page load
+    // Show popup after 5 seconds on page load
     window.onload = () => {
-      popupOverlay.style.display = 'flex';
-      startTimer();
+      setTimeout(() => {
+        popupOverlay.style.display = 'flex';
+        startTimer();
+      }, 5000); // 5000 milliseconds = 5 seconds
     };
 
     // Timer for enabling close button
