@@ -156,6 +156,110 @@
       background: var(--primary-hover);
     }
 
+    /* Popup Styles */
+    .popup-overlay {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay */
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background: var(--container-bg);
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      animation: slideIn 0.5s ease-out; /* Smooth slide-in animation */
+      position: relative;
+      overflow: hidden;
+    }
+
+    .popup-content img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover; /* Keeps image aspect ratio */
+      border-radius: 10px 10px 0 0;
+      margin: 0;
+    }
+
+    .popup-content h3 {
+      font-size: 1.5em;
+      color: var(--heading-color);
+      margin: 15px 0;
+    }
+
+    .popup-content .join-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--primary-color);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: background 0.3s ease;
+      margin-bottom: 15px;
+    }
+
+    .popup-content .join-btn:hover {
+      background: var(--primary-hover);
+    }
+
+    .popup-content .close-btn {
+      padding: 8px 15px;
+      background: #ccc;
+      border: none;
+      border-radius: 5px;
+      cursor: not-allowed; /* Disabled look initially */
+      font-weight: 500;
+      transition: background 0.3s ease, cursor 0.3s ease;
+    }
+
+    .popup-content .close-btn.enabled {
+      background: #e74c3c; /* Red when clickable */
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .popup-content .close-btn.enabled:hover {
+      background: #c0392b;
+    }
+
+    .timer-text {
+      font-size: 0.9em;
+      color: var(--text-color);
+      margin-top: 10px;
+    }
+
+    /* Animation for popup entrance */
+    @keyframes slideIn {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Dark mode adjustments */
+    .dark-mode .popup-content {
+      background: var(--container-bg);
+    }
+
+    .dark-mode .timer-text {
+      color: #bbb;
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       .layout {
@@ -173,6 +277,18 @@
   </style>
 </head>
 <body>
+  <!-- Popup Div -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-content">
+      <img src="https://via.placeholder.com/400x150?text=Airdrop+Family" alt="Airdrop Family Photo" />
+      <h3>Want up-to-date airdrops? Join our family!</h3>
+      <a href="https://t.me/Airdrop_hunts_fy_bot" target="_blank" class="join-btn">Join Our Family</a>
+      <br>
+      <button class="close-btn" id="closeBtn" disabled>Close</button>
+      <p class="timer-text" id="timerText">Please wait 10 seconds...</p>
+    </div>
+  </div>
+
   <header>
     <h1>Airdrop Guide for Newbies</h1>
   </header>
@@ -192,10 +308,10 @@
 
     <!-- Main Content -->
     <main>
-        <section id="conclusion">
-            <h2>REMEMBER</h2>
-            <p>Remember, there is no free money you can claim with one click. It takes patience and determination to earn these rewards. in short, 'wag kang mag tatanong "ma anong ulam?"</p>
-          </section>
+      <section id="conclusion">
+        <h2>REMEMBER</h2>
+        <p>Remember, there is no free money you can claim with one click. It takes patience and determination to earn these rewards. in short, 'wag kang mag tatanong "ma anong ulam?"</p>
+      </section>
       <!-- Nomisma Section -->
       <section id="nomisma">
         <h2>Nomisma</h2>
@@ -250,8 +366,8 @@
           <h3>For PC:</h3>
           <ol>
             <li>
-                Link: <a href="https://app.meshchain.ai?ref=5AYIBFFTW92J" target="_blank">https://app.meshchain.ai?ref=5AYIBFFTW92J</a>
-              </li>              
+              Link: <a href="https://app.meshchain.ai?ref=5AYIBFFTW92J" target="_blank">https://app.meshchain.ai?ref=5AYIBFFTW92J</a>
+            </li>              
             <li>Click <strong>Sign in with Google</strong> and choose your account.</li>
             <li>
               On your dashboard, click <strong>Install Browser Extension</strong> to be redirected to the Chrome Web Store and download the Mesh Chain extension.
@@ -276,19 +392,9 @@
               (use your Google account and click <strong>Sign In</strong>).
             </li>
             <li>Search for the Mesh Chain extension and download it.</li>
-            or <a href="#" onclick="copyToClipboard()">copy this link</a> and paste it in your Yandex browser.
-            
-            <script>
-            function copyToClipboard() {
-                const text = "https://chromewebstore.google.com/detail/meshnode/lobckpihghfknleknppdjnnncpcfpcgh?hl=en";
-                navigator.clipboard.writeText(text).then(() => {
-                    alert("Link copied!");
-                }).catch(err => {
-                    console.error("Failed to copy: ", err);
-                });
-            }
-            </script>
-            
+            <li>
+              Or <a href="#" onclick="copyToClipboard()">copy this link</a> and paste it in your Yandex browser.
+            </li>
             <li>Tap the three dots next to the URL bar.</li>
             <img src="3dots.jpg" alt="meshchain" />
             <img src="meshchain_ext.jpg" alt="meshchain" />
@@ -296,7 +402,7 @@
               Scroll down until you find the extension, then click <strong>Mesh Node</strong>. When prompted to sign in, click to continue.
             </li>
             <li>
-              also, connect your Telegram node by clicking <strong>Set up Telegram Node</strong> in the dashboard.
+              Also, connect your Telegram node by clicking <strong>Set up Telegram Node</strong> in the dashboard.
             </li>
             <li>Claim your points every 2 hours using the extension or Telegram app.</li>
           </ol>
@@ -373,14 +479,11 @@
         </ol>
         <p><em>Note:</em> You will earn points if your PC is active. Approximately 500 points equals $8-9, and you can earn up to 600-700 points daily.</p>
       </section>
-
-      <!-- Final Thoughts -->
-    
     </main>
   </div>
 
   <footer>
-    <p>&copy; 2025 Airdrop Guide. All rights reserved.</p>
+    <p>© 2025 Airdrop Guide. All rights reserved.</p>
   </footer>
 
   <!-- Dark Mode Toggle Button -->
@@ -391,6 +494,56 @@
     const darkModeToggle = document.getElementById('darkModeToggle');
     darkModeToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
+    });
+
+    // Mesh Chain copy-to-clipboard function
+    function copyToClipboard() {
+      const text = "https://chromewebstore.google.com/detail/meshnode/lobckpihghfknleknppdjnnncpcfpcgh?hl=en";
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Link copied!");
+      }).catch(err => {
+        console.error("Failed to copy: ", err);
+      });
+    }
+
+    // Popup logic
+    const popupOverlay = document.getElementById('popupOverlay');
+    const closeBtn = document.getElementById('closeBtn');
+    const timerText = document.getElementById('timerText');
+    let timeLeft = 10;
+
+    // Show popup on page load
+    window.onload = () => {
+      popupOverlay.style.display = 'flex';
+      startTimer();
+    };
+
+    // Timer for enabling close button
+    function startTimer() {
+      const timer = setInterval(() => {
+        timeLeft--;
+        timerText.textContent = `Please wait ${timeLeft} seconds...`;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          closeBtn.disabled = false;
+          closeBtn.classList.add('enabled');
+          timerText.textContent = 'You can now close the popup!';
+        }
+      }, 1000);
+    }
+
+    // Close popup when close button is clicked
+    closeBtn.addEventListener('click', () => {
+      if (!closeBtn.disabled) {
+        popupOverlay.style.display = 'none';
+      }
+    });
+
+    // Optional: Close popup when clicking outside (after timer)
+    popupOverlay.addEventListener('click', (e) => {
+      if (e.target === popupOverlay && timeLeft <= 0) {
+        popupOverlay.style.display = 'none';
+      }
     });
   </script>
 </body>
